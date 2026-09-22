@@ -80,6 +80,9 @@ export default function Nav() {
               <a href={link.href}>{link.label}</a>
             </li>
           ))}
+          <li style={{ borderTop: '1px solid rgba(253,250,245,0.1)', marginTop: '12px', paddingTop: '12px' }}>
+            <a href="/contacto">Contacto</a>
+          </li>
         </ul>
         <span className="drawer-lang">EN · Proximamente</span>
         <div className="drawer-contact">

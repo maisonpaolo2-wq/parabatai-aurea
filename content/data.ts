@@ -23,7 +23,6 @@ export const navLinks = [
   { label: 'Servicios', href: '/servicios' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Nosotras', href: '/sobre-nosotras' },
-  { label: 'Contacto', href: '/contacto' },
 ]
 
 export const stats = [
