@@ -2,36 +2,35 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { site, navLinks } from '@/content/data'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    setOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  const close = () => setOpen(false)
-
-  const navClass = ['nav', scrolled ? 'scrolled' : 'light'].join(' ')
-
   return (
     <>
-      <nav className={navClass}>
+      <nav className={`nav${scrolled ? ' scrolled' : ''}`}>
         <div className="nav-inner">
-          <a href="/" className="nav-logo" onClick={close}>
+          <a href="/" className="nav-logo">
             <div className="nav-logo-img">
               <Image
                 src="/photos/logo.jpg"
@@ -47,14 +46,19 @@ export default function Nav() {
           <ul className="nav-links">
             {navLinks.map(link => (
               <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+                <a
+                  href={link.href}
+                  className={pathname === link.href ? 'active' : ''}
+                >
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
 
           <div className="nav-actions">
             <span className="nav-lang" title="Proximamente · Coming soon">EN</span>
-            <a href="#contacto" className="nav-cta">Hablemos</a>
+            <a href="/contacto" className="nav-cta">Hablemos</a>
             <button
               className={`burger${open ? ' open' : ''}`}
               onClick={() => setOpen(o => !o)}
@@ -73,7 +77,7 @@ export default function Nav() {
         <ul className="drawer-links">
           {navLinks.map(link => (
             <li key={link.href}>
-              <a href={link.href} onClick={close}>{link.label}</a>
+              <a href={link.href}>{link.label}</a>
             </li>
           ))}
         </ul>

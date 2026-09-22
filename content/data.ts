@@ -20,10 +20,16 @@ export const site = {
 }
 
 export const navLinks = [
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Nosotras', href: '#nosotras' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Nosotras', href: '/sobre-nosotras' },
+  { label: 'Contacto', href: '/contacto' },
+]
+
+export const stats = [
+  { num: '+50', label: 'Bodas organizadas' },
+  { num: '3', label: 'Anos de experiencia' },
+  { num: '100%', label: 'Clientes satisfechos' },
 ]
 
 export const services = [
